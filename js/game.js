@@ -12,12 +12,18 @@ function Game(map,food,block,snake){
     this.block = block
     this.snake =snake
 
+    //
+    this.startbar = null
+
+    //蛇移动时间 ms
+    this.time = 500
+
 }
 //初始化
 Game.prototype.init = function(){
 
     //渲染地图
-    this.map.render()
+    this.renderMap()
     //渲染食物
     this.renderFood()
     //渲染障碍物
@@ -25,8 +31,16 @@ Game.prototype.init = function(){
     //渲染蛇
     this.renderSnake()
 
+    //启动游戏
+    this.start()
 
 
+
+}
+
+//渲染地图
+Game.prototype.renderMap = function (){
+    this.map.render()
 }
 
 //渲染食物
@@ -58,4 +72,29 @@ Game.prototype.renderSnake = function(){
         this.map.arr[item.y][item.x].style.backgroundImage = 'url('+this.snake.bodyImg+')'
     }
 
+}
+
+//开始游戏
+Game.prototype.start = function (){
+    let me = this
+    me.startbar = setInterval(function(){
+        //清除地图标记
+        me.clear()
+
+        me.snake.move()
+        //渲染食物
+        me.renderFood()
+        //渲染障碍物
+        me.renderBlock()
+        //渲染蛇
+        me.renderSnake()
+    },me.time)
+}
+
+Game.prototype.clear = function (){
+    for(let i =0;i<this.map.row;i++){
+        for(let j =0;j<this.map.col;j++){
+            this.map.arr[i][j].style.backgroundImage = ''
+        }
+    }
 }

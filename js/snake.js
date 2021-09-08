@@ -35,3 +35,25 @@ function Snake(arr){
             break
     }
 }
+
+//蛇移动
+Snake.prototype.move = function (){
+    //蛇移动 数组第一个元素 找到下一个位置点。删除尾部元素
+    let head = {x:this.arr[0].x,y:this.arr[0].y}
+    switch (this.direction) {
+        case "ArrowLeft":
+            head.x -=1
+            break
+        case "ArrowUp":
+            head.y -=1
+            break
+        case "ArrowRight":
+            head.x +=1
+            break
+        case "ArrowDown":
+            head.y +=1
+            break
+    }
+    this.arr.unshift(head)
+    this.arr.pop()
+}
