@@ -31,9 +31,17 @@
         let map = new Map(30,30,300,300)
         //食物 。x,y坐标(5,2) 从0开始
         let food = new Food(5,2,'./img/food.jpg')
+        //
         let snake = new Snake()
-        let block = new Block()
-        let game = new Game(map,food,snake,block)
+        //障碍物
+        let block = new Block([
+            {x:3,y:6},
+            {x:4,y:6},
+            {x:5,y:6},
+            {x:6,y:6},
+            {x:7,y:6},
+        ],'./img/block.png')
+        let game = new Game(map,food,block,snake)
         game.init()
     </script>
 

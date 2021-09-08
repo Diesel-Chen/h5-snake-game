@@ -1,4 +1,6 @@
 //障碍物类
-function Block(){
+function Block(arr,img){
+    this.arr = arr
+    this.img = img
 
 }
