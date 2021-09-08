@@ -6,6 +6,18 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>贪吃蛇大作战</title>
+    <style>
+        .box{
+            margin: 10px auto;
+        }
+        .row{
+            display: flex;
+        }
+        .col{
+            border: 1px solid #ccc;
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
     <script src="js/block.js"></script>
@@ -14,11 +26,12 @@
     <script src="js/map.js"></script>
     <script src="js/snake.js"></script>
     <script>
-        var map = new Map()
-        var food = new Food()
-        var snake = new Snake()
-        var block = new Block()
-        var game = new Game(map,food,snake,block)
+        //地图对象
+        let map = new Map(30,30,300,300)
+        let food = new Food()
+        let snake = new Snake()
+        let block = new Block()
+        let game = new Game(map,food,snake,block)
         game.init()
     </script>
 
