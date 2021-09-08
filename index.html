@@ -31,8 +31,12 @@
         let map = new Map(30,30,300,300)
         //食物 。x,y坐标(5,2) 从0开始
         let food = new Food(5,2,'./img/food.jpg')
-        //
-        let snake = new Snake()
+        //贪吃蛇
+        let snake = new Snake([
+            {x:6,y:4},
+            {x:5,y:4},
+            {x:4,y:4}
+        ])
         //障碍物
         let block = new Block([
             {x:3,y:6},

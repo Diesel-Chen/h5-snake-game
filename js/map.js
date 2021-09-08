@@ -1,12 +1,15 @@
-//地图类
+/**
+ *
+ * @param singleWidth  单个单元格宽
+ * @param singleHeight 单个单元格高
+ * @param width 整体区域宽
+ * @param height 整体区域高
+ * @constructor 地图类
+ */
 function Map(singleWidth,singleHeight,width,height){
-    //单个单元格宽
     this.singleWidth = singleWidth
-    //单个单元格高
     this.singleHeight = singleHeight
-    //整体区域宽
     this.width = width
-    //整体区域高
     this.height =height
     //总行
     this.row = height / singleHeight
