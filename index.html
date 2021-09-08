@@ -15,6 +15,7 @@
         }
         .col{
             border: 1px solid #ccc;
+            background-size: cover;
             flex: 1;
         }
     </style>
@@ -28,7 +29,8 @@
     <script>
         //地图对象
         let map = new Map(30,30,300,300)
-        let food = new Food()
+        //食物 。x,y坐标(5,2) 从0开始
+        let food = new Food(5,2,'./img/food.jpg')
         let snake = new Snake()
         let block = new Block()
         let game = new Game(map,food,snake,block)
