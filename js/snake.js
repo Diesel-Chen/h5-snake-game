@@ -63,7 +63,6 @@ Snake.prototype.move = function (){
 
 //蛇改变方向
 Snake.prototype.change = function(e){
-    console.log(this.lock)
     if(this.lock){
         return
     }
