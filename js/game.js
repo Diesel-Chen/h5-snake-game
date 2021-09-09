@@ -85,12 +85,15 @@ Game.prototype.start = function (){
     this.startbar = setInterval(function(){
         //清除地图标记
 
+        //移动蛇
+        me.snake.move()
         //检测边界
         me.check()
+        //检测障碍物
+        me.checkBlock()
         if (me.state){
             me.clear()
 
-            me.snake.move()
             //渲染食物
             me.renderFood()
             //渲染障碍物
@@ -118,11 +121,22 @@ Game.prototype.clear = function (){
 
 Game.prototype.check = function (){
     head = this.snake.arr[0]
-    if(head.x <=0 || head.y <=0 || head.x >= this.map.col-1 || head.y >= this.map.row-1 ){
-        console.log()
+    if(head.x <0 || head.y <0 || head.x >= this.map.col || head.y >= this.map.row ){
         alert("游戏结束，你的得分:"+this.snake.arr.length+"")
         clearInterval(this.startbar)
         this.state =false
+    }
+}
+
+Game.prototype.checkBlock = function (){
+    head = this.snake.arr[0]
+    for(let i = 0;i<this.block.arr.length;i++){
+        item = this.block.arr[i]
+        if(head.x === item.x && head.y ===item.y){
+            alert("游戏结束，你的得分:"+this.snake.arr.length+"")
+            clearInterval(this.startbar)
+            this.state =false
+        }
     }
 }
 
