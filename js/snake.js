@@ -119,9 +119,12 @@ Snake.prototype.change = function(e){
                 break
         }
     }
-
-
     this.lock = true
 
+}
 
+//蛇增长
+Snake.prototype.groupUp = function (){
+    tail = this.arr[this.arr.length -1]
+    this.arr.push(tail)
 }

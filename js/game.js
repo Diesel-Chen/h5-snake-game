@@ -16,7 +16,7 @@ function Game(map,food,block,snake){
     this.startbar = null
 
     //蛇移动时间 ms
-    this.time = 500
+    this.time = 120
 
     //能否正常游戏
     this.state = true
@@ -91,6 +91,9 @@ Game.prototype.start = function (){
         me.check()
         //检测障碍物
         me.checkBlock()
+
+        //吃食物
+        me.eatFood()
         if (me.state){
             me.clear()
 
@@ -138,5 +141,36 @@ Game.prototype.checkBlock = function (){
             this.state =false
         }
     }
+}
+
+Game.prototype.eatFood = function (){
+    head = this.snake.arr[0]
+    if(head.x === this.food.x && head.y ===this.food.y){
+        //蛇成长
+        this.snake.groupUp()
+        //充值食物
+        this.resetFood()
+    }
+}
+
+Game.prototype.resetFood = function (){
+    let x = Math.floor(Math.random() * this.map.col)
+    let y = Math.floor(Math.random() * this.map.row)
+    for(let i=0;i<this.snake.arr.length;i++){
+        if(x ===this.snake.arr[i].x && y === this.snake.arr[i].y){
+            this.resetFood()
+            return
+        }
+    }
+
+    for(let i =0;i<this.block.arr.length;i++){
+        if(x ===this.block.arr[i].x && y === this.block.arr[i].y){
+            this.resetFood()
+            return
+        }
+    }
+
+    this.food.reset(x,y)
+
 }
 
