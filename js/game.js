@@ -77,7 +77,8 @@ Game.prototype.renderSnake = function(){
 //开始游戏
 Game.prototype.start = function (){
     let me = this
-    me.startbar = setInterval(function(){
+
+    this.startbar = setInterval(function(){
         //清除地图标记
         me.clear()
 
@@ -88,7 +89,13 @@ Game.prototype.start = function (){
         me.renderBlock()
         //渲染蛇
         me.renderSnake()
-    },me.time)
+
+        me.snake.lock = false
+    },this.time)
+
+    window.onkeydown = function (e){
+        me.snake.change(e)
+    }
 }
 
 Game.prototype.clear = function (){
@@ -98,3 +105,4 @@ Game.prototype.clear = function (){
         }
     }
 }
+

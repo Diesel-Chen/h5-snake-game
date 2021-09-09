@@ -16,6 +16,9 @@ function Snake(arr){
     //初始化方向 向右
     this.direction = 'ArrowRight'
 
+    //是否可以改变方向
+    this.lock =false
+
     switch (this.direction) {
         case "ArrowLeft":
             this.headImg = headImg[0]
@@ -56,4 +59,36 @@ Snake.prototype.move = function (){
     }
     this.arr.unshift(head)
     this.arr.pop()
+}
+
+//蛇改变方向
+Snake.prototype.change = function(e){
+    console.log(this.lock)
+    if(this.lock){
+        return
+    }
+    switch (this.direction){
+        case "ArrowLeft":
+            if(e.key === 'ArrowRight')
+                return
+            break
+        case "ArrowUp":
+            if(e.key === 'ArrowDown')
+                return
+            break
+        case "ArrowRight":
+            if(e.key === 'ArrowLeft')
+                return
+            break
+        case "ArrowDown":
+            if(e.key === 'ArrowUp')
+                return
+            break
+    }
+    if(e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'ArrowRight' || e.key === 'ArrowDown')
+        this.direction = e.key
+
+    this.lock = true
+
+
 }
