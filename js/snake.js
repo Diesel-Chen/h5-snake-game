@@ -9,32 +9,34 @@ function Snake(arr){
     //左、上、右、下
     //ArrowLeft、ArrowUp、ArrowRight、ArrowDown
     //37、38、39、40
-    let headImg = ['./img/1.png','./img/2.png','./img/3.png','./img/4.png']
+    this.headImgArr = ['./img/1.png','./img/2.png','./img/3.png','./img/4.png']
     this.bodyImg = './img/5.png'
-    let tailImg = ['./img/8.png','./img/9.png','./img/6.png','./img/7.png']
+    this.tailImgArr = ['./img/8.png','./img/9.png','./img/6.png','./img/7.png']
 
     //初始化方向 向右
     this.direction = 'ArrowRight'
 
     //是否可以改变方向
     this.lock =false
+    this.headImg = ''
+    this.tailImg = ''
 
     switch (this.direction) {
         case "ArrowLeft":
-            this.headImg = headImg[0]
-            this.tailImg = tailImg[0]
+            this.headImg = this.headImgArr[0]
+            this.tailImg = this.tailImgArr[0]
             break
         case "ArrowUp":
-            this.headImg = headImg[1]
-            this.tailImg = tailImg[1]
+            this.headImg = this.headImgArr[1]
+            this.tailImg = this.tailImgArr[1]
             break
         case "ArrowRight":
-            this.headImg = headImg[2]
-            this.tailImg = tailImg[2]
+            this.headImg = this.headImgArr[2]
+            this.tailImg = this.tailImgArr[2]
             break
         case "ArrowDown":
-            this.headImg = headImg[3]
-            this.tailImg = tailImg[3]
+            this.headImg = this.headImgArr[3]
+            this.tailImg = this.tailImgArr[3]
             break
     }
 }
@@ -59,6 +61,22 @@ Snake.prototype.move = function (){
     }
     this.arr.unshift(head)
     this.arr.pop()
+    //判断尾部图片方向
+    tail = this.arr[this.arr.length-1]
+    tailSecond = this.arr[this.arr.length-2]
+    if(tail.x === tailSecond.x){
+        if (tailSecond.y>tail.y){
+            this.tailImg = this.tailImgArr[3]
+        }else{
+            this.tailImg = this.tailImgArr[1]
+        }
+    }else if (tail.y === tailSecond.y){
+        if(tailSecond.x>tail.x){
+            this.tailImg = this.tailImgArr[2]
+        }else{
+            this.tailImg = this.tailImgArr[0]
+        }
+    }
 }
 
 //蛇改变方向
@@ -84,8 +102,24 @@ Snake.prototype.change = function(e){
                 return
             break
     }
-    if(e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'ArrowRight' || e.key === 'ArrowDown')
+    if(e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'ArrowRight' || e.key === 'ArrowDown'){
         this.direction = e.key
+        switch (this.direction) {
+            case "ArrowLeft":
+                this.headImg = this.headImgArr[0]
+                break
+            case "ArrowUp":
+                this.headImg = this.headImgArr[1]
+                break
+            case "ArrowRight":
+                this.headImg = this.headImgArr[2]
+                break
+            case "ArrowDown":
+                this.headImg = this.headImgArr[3]
+                break
+        }
+    }
+
 
     this.lock = true
 
